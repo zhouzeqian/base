@@ -9,7 +9,7 @@
         <!-- spring版本号 -->  
         <spring.version>4.2.6.RELEASE</spring.version>  
         <!-- mybatis版本号 -->  
-        <mybatis.version>3.3.1</mybatis.version>  
+        <mybatis.version>3.4.0</mybatis.version>  
         <!-- log4j日志文件管理包版本 -->  
         <hibernate-validator-version>5.1.3.Final</hibernate-validator-version>
         <slf4j.version>1.7.7</slf4j.version>  
@@ -100,13 +100,13 @@
         <dependency>  
             <groupId>org.mybatis</groupId>  
             <artifactId>mybatis-spring</artifactId>  
-            <version>1.2.2</version>  
+            <version>1.3.0</version>  
         </dependency>  
          <!-- mybatis分页包 -->
         <dependency>
     		<groupId>com.github.pagehelper</groupId>
     		<artifactId>pagehelper</artifactId>
-    		<version>4.1.3</version>
+    		<version>4.1.4</version>
 		</dependency>
 		<dependency>
       		<groupId>com.github.jsqlparser</groupId>
@@ -123,12 +123,12 @@
         <dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.0.18</version>
+			<version>1.0.19</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.38</version>
+			<version>6.0.2</version>
 		</dependency>
         
         <!-- 导入dbcp的jar包，用来在applicationContext.xml中配置数据库 -->  
@@ -156,7 +156,7 @@
         <dependency>  
             <groupId>com.alibaba</groupId>  
             <artifactId>fastjson</artifactId>  
-            <version>1.2.8</version>  
+            <version>1.2.11</version>  
         </dependency>  
   
   
