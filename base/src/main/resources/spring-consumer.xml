@@ -9,6 +9,13 @@
        http://code.alibabatech.com/schema/dubbo/dubbo.xsd
        http://www.springframework.org/schema/context  
        http://www.springframework.org/schema/context/spring-context-4.2.xsd  ">
+       
+       <!-- 提供方应用名称信息，这个相当于起一个名字，我们dubbo管理页面比较清晰是哪个应用暴露出来的 -->
+   <dubbo:application name="dubbo_service"></dubbo:application>
+   <!-- 使用zookeeper注册中心暴露服务地址 -->  
+   <dubbo:registry address="${dubbo.registry.address}"></dubbo:registry>
+   <!-- 要暴露的服务接口 --> 
+   <dubbo:annotation package="com.hzlh.service" />
  
     <!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
     <dubbo:application name="dubbo-client"/>
