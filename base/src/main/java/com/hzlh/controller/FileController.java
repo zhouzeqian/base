@@ -10,11 +10,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.hzlh.base.ResultBase;
@@ -23,7 +23,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
-@Controller
+@RestController
 @Api(value="FileController",description="文件上传下载测试")
 @RequestMapping(value="/file")
 public class FileController {
@@ -32,7 +32,7 @@ public class FileController {
 	
 	@ApiOperation(value="文件上传",notes="文件上传")
 	@RequestMapping(value="upload",method=RequestMethod.POST)
-	@ResponseBody
+	
 	public ResultBase<String> upload(
 			@ApiParam(name="files",value="files") @RequestParam(value="files") CommonsMultipartFile files){
 		CommonsMultipartFile[] cmf=new CommonsMultipartFile[]{files};
@@ -41,7 +41,7 @@ public class FileController {
 	
 	@ApiOperation(value="文件列表",notes="文件列表")
 	@RequestMapping(value="list",method=RequestMethod.POST)
-	@ResponseBody
+	
 	public ResultBase<String[]> list(){
 		
 		return flieService.list();
@@ -49,7 +49,7 @@ public class FileController {
 	
 	@ApiOperation(value="文件下载",notes="文件下载")
 	@RequestMapping(value="down",method=RequestMethod.GET)
-	@ResponseBody
+	
 	public ResponseEntity<byte[]> down(
 			@ApiParam(name="fileName",value="文件名") @RequestParam(value="fileName") String fileName){
 		File file=new File("D:/upload/"+fileName);  

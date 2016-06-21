@@ -5,7 +5,8 @@
     <param-value>
 			classpath:applicationContext.xml,
 			classpath:spring-security.xml,
-			classpath:activemq.xml
+			classpath:activemq.xml,
+			classpath:quartz.xml
 		</param-value>
   </context-param>
   <listener>

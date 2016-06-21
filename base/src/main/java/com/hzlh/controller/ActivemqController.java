@@ -2,11 +2,11 @@ package com.hzlh.controller;
 
 import javax.annotation.Resource;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.hzlh.base.ResultBase;
 import com.hzlh.base.SystemDefined;
@@ -16,7 +16,7 @@ import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 
-@Controller
+@RestController
 @Api(value="ActivemqController",description="消息测试")
 @RequestMapping("/jms")
 public class ActivemqController {
@@ -26,7 +26,7 @@ public class ActivemqController {
 	private TopicSender topicSender;
 	
 	@RequestMapping(value="/sengQueue",method=RequestMethod.POST)
-	@ResponseBody
+	
 	@ApiOperation(value="发送Queue消息",notes="发送Queue消息")
 	public ResultBase<String> sendQueue(
 			@ApiParam(name="msg",value="发送到Queue的消息") @RequestParam(value="msg") String msg){
@@ -39,7 +39,7 @@ public class ActivemqController {
 		
 	}
 	@RequestMapping(value="/sengTopic",method=RequestMethod.POST)
-	@ResponseBody
+	
 	@ApiOperation(value="发送Topic消息",notes="发送Topic消息")
 	public ResultBase<String> sendTopic(
 			@ApiParam(name="msg",value="发送到Topic的消息") @RequestParam(value="msg") String msg){

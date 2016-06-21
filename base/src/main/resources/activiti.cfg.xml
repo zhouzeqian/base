@@ -17,4 +17,10 @@
         <property name="jdbcPassword" value="${jdbc.password}"/>
         <property name="jobExecutorActivate" value="true"/>
     </bean>
+    
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">  
+  
+      <property name="processEngineConfiguration" ref="processEngineConfiguration" />  
+  
+  </bean>  
 </beans>
