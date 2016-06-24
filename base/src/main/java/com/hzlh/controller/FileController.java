@@ -73,4 +73,23 @@ public class FileController {
         
         return entity;
 	}
+	
+	@ApiOperation(value="文件删除",notes="文件删除")
+	@RequestMapping(value="delete",method=RequestMethod.POST)
+	
+	public ResultBase<String> delete(
+			@ApiParam(name="fileName",value="文件名") @RequestParam(value="fileName") String fileName){
+		
+		return flieService.delete(fileName);
+	}
+	
+	@ApiOperation(value="文件重命名",notes="文件重命名")
+	@RequestMapping(value="rename",method=RequestMethod.POST)
+	
+	public ResultBase<String> rename(
+			@ApiParam(name="oldName",value="旧文件名") @RequestParam(value="oldName") String oldName,
+			@ApiParam(name="newName",value="新文件名") @RequestParam(value="newName") String newName){
+		
+		return flieService.rename(oldName, newName);
+	}
 }

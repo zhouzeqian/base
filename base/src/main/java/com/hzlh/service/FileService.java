@@ -10,4 +10,8 @@ public interface FileService {
 	
 	public ResultBase<String[]> list();
 	
+	public ResultBase<String> delete(String fileName);
+	
+	public ResultBase<String> rename(String oldName,String newName);
+	
 }

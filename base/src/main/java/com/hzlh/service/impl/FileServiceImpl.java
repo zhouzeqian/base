@@ -46,6 +46,38 @@ public class FileServiceImpl implements FileService{
 		return rb;
 	}
 
+	@Override
+	public ResultBase<String> delete(String fileName) {
+		File file=new File("D:/upload/"+fileName);
+		ResultBase<String> rb=new ResultBase<String>();
+		if(file.exists()){
+			file.delete();
+			rb.setCode(SystemDefined.ResultCode.SUCCESS);
+			rb.setMsg("文件删除成功！");
+			return rb;
+		}else{
+			rb.setCode(SystemDefined.ResultCode.FAILURE);
+			rb.setMsg("文件不存在！");
+			return rb;
+		}
+	}
+
+	@Override
+	public ResultBase<String> rename(String oldName, String newName) {
+		File file=new File("D:/upload/"+oldName);
+		ResultBase<String> rb=new ResultBase<String>();
+		if(file.exists()){
+			file.renameTo(new File("D:/upload/"+newName));
+			rb.setCode(SystemDefined.ResultCode.SUCCESS);
+			rb.setMsg("文件重命名成功！");
+			return rb;
+		}else{
+			rb.setCode(SystemDefined.ResultCode.FAILURE);
+			rb.setMsg("文件不存在！");
+			return rb;
+		}
+	}
+
 
 
 }
