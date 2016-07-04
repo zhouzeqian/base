@@ -2,8 +2,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans  
                         http://www.springframework.org/schema/beans/spring-beans-4.2.xsd  
                         http://www.springframework.org/schema/context  
@@ -12,34 +11,74 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
                         http://code.alibabatech.com/schema/dubbo 
                         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
-                        
-    <context:property-placeholder location="classpath:dubbo.properties" ignore-unresolvable="true"/>
+
+	<context:property-placeholder location="classpath:dubbo.properties"
+		ignore-unresolvable="true" />
+	<context:property-placeholder location="classpath:freemarker.properties"
+		ignore-unresolvable="true" />
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.hzlh.controller">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-		 <context:exclude-filter type="annotation"
-            expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+		<context:include-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
-	 <mvc:default-servlet-handler />
-	 <mvc:annotation-driven/>
-	
-	<!-- 定义跳转的文件的前后缀 ，视图模式配置-->
-	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<mvc:default-servlet-handler />
+	<mvc:annotation-driven />
+
+	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<!-- 这里的配置我的理解是自动给后面action的方法return的字符串加上前缀和后缀，变成一个 可用的url地址 -->
 		<property name="prefix" value="/WEB-INF/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
-	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
-	<bean id="multipartResolver"  
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">  
-        <!-- 默认编码 -->
-        <property name="defaultEncoding" value="utf-8" />  
-        <!-- 文件大小最大值 -->
-        <property name="maxUploadSize" value="10485760000" />  
-        <!-- 内存中的最大值 -->
-        <property name="maxInMemorySize" value="40960" />  
-    </bean> 
 
+	<!-- 配置文件上传，如果没有使用文件上传可以不用配置，当然如果不配，那么配置文件中也不必引入上传组件包 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 默认编码 -->
+		<property name="defaultEncoding" value="utf-8" />
+		<!-- 文件大小最大值 -->
+		<property name="maxUploadSize" value="10485760000" />
+		<!-- 内存中的最大值 -->
+		<property name="maxInMemorySize" value="40960" />
+	</bean>
+	<!-- ===================================================== -->
+	<!-- ViewResolver For FreeMarker -->
+	<!-- ===================================================== -->
+	<bean id="freemarkerResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="order" value="1" />
+		<property name="suffix" value=".ftl" />
+		<property name="contentType" value="text/html;charset=utf-8" />
+		<property name="viewClass">
+			<value>org.springframework.web.servlet.view.freemarker.FreeMarkerView
+			</value>
+		</property>
+	</bean>
+	<!-- ===================================================== -->
+	<!-- ViewResolver For FreeMarkerConfigurer -->
+	<!-- ===================================================== -->
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath">
+			<value>/view/</value>
+		</property>
+		<property name="freemarkerSettings"><!-- 设置FreeMarker环境属性 -->
+			<props>
+				<prop key="template_update_delay">${freemarker.template_update_delay}</prop><!--刷新模板的周期，单位为秒 -->
+				<prop key="default_encoding">${freemarker.default_encoding}</prop><!--模板的编码格式 -->
+				<prop key="locale">${freemarker.locale}</prop><!-- 本地化设置 -->
+				<prop key="datetime_format">${freemarker.datetime_format}</prop>
+				<prop key="time_format">${freemarker.time_format}</prop>
+				<prop key="number_format">${freemarker.number_format}</prop>
+				<prop key="boolean_format">${freemarker.boolean_format}</prop>
+				<prop key="whitespace_stripping">${freemarker.whitespace_stripping}</prop>
+				<prop key="tag_syntax">${freemarker.tag_syntax}</prop>
+				<prop key="url_escaping_charset">${freemarker.url_escaping_charset}</prop>
+			</props>
+		</property>
+	</bean>
 </beans>
