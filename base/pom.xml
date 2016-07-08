@@ -86,6 +86,18 @@
 			<artifactId>spring-test</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		<!-- websocket -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-websocket</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-messaging</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
 		<!-- mybatis核心包 -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
@@ -115,12 +127,7 @@
 			<artifactId>jsqlparser</artifactId>
 			<version>0.9.5</version>
 		</dependency>
-		<!-- 导入java ee jar 包 -->
-		<dependency>
-			<groupId>javax</groupId>
-			<artifactId>javaee-api</artifactId>
-			<version>7.0</version>
-		</dependency>
+
 		<!-- dataSource -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -376,6 +383,12 @@
 			<version>2.3.23</version>
 		</dependency>
 
+		<!-- jsoup -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.9.2</version>
+		</dependency>
 	</dependencies>
 
 

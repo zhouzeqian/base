@@ -17,7 +17,7 @@ public class FreeMarkerController {
 	@RequestMapping("/list")
 	public ModelAndView getUserList(ModelAndView mav){
 		List<User> userList=Lists.newArrayList();
-		for(int i=0;i<10;i++){
+		for(long i=0;i<10;i++){
 			User user=new User();
 			user.setId(i);
 			user.setArchived(true);

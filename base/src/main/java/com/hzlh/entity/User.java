@@ -20,7 +20,7 @@ public class User implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty("ID")
-	private Integer id;
+	private Long id;
 	@ApiModelProperty("唯一码")
     private String guid=UUID.randomUUID().toString().replaceAll("-", "");
 	@ApiModelProperty("创建时间")
@@ -42,11 +42,11 @@ public class User implements Serializable {
 	@ApiModelProperty("权限")
     private List<Privilege> privileges = new ArrayList<>();
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
