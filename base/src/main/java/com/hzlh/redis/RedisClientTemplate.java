@@ -2956,7 +2956,8 @@ public class RedisClientTemplate {
         }
         boolean broken = false;
         try {
-            result = shardedJedis.pipelined(shardedJedisPipeline);
+        	ShardedJedisPipeline sj = shardedJedis.pipelined();
+        	result=sj.getResults();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             broken = true;

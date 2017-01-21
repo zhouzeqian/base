@@ -2,7 +2,6 @@ package com.hzlh.util;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.Properties;
 

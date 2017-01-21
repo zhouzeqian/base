@@ -2,8 +2,6 @@ package com.hzlh.test;
 
 import java.util.Date;
 
-import com.hzlh.util.PropertiesUtil;
-
 public class MyTest {
 	
 	public void work() {  
