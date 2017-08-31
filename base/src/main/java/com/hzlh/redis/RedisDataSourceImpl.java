@@ -27,16 +27,11 @@ public class RedisDataSourceImpl implements RedisDataSource {
         return null;
     }
 
-    @SuppressWarnings("deprecation")
 	public void returnResource(ShardedJedis shardedJedis) {
-        shardedJedisPool.returnResource(shardedJedis);
+    	shardedJedis.close();
     }
 
     public void returnResource(ShardedJedis shardedJedis, boolean broken) {
-        if (broken) {
-            shardedJedisPool.returnBrokenResource(shardedJedis);
-        } else {
-            shardedJedisPool.returnResource(shardedJedis);
-        }
+    	shardedJedis.close();	
     }
 }
