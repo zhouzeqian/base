@@ -13,15 +13,16 @@ public class ResultBase <T> implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value="返回码")
-	private Integer code;
+	private Boolean code;
 	@ApiModelProperty(value="返回描述信息")
 	private String msg;
 	@ApiModelProperty(value="返回值")
 	private T obj;
-	public Integer getCode() {
+	
+	public Boolean getCode() {
 		return code;
 	}
-	public void setCode(Integer code) {
+	public void setCode(Boolean code) {
 		this.code = code;
 	}
 	public String getMsg() {

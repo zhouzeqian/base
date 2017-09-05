@@ -1,5 +1,7 @@
 package com.hzlh.dao;
 
+import java.util.List;
+
 import com.hzlh.entity.User;
 
 public interface UserMapper {
@@ -16,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
     
     User findByUserName(String username);
+    
+    List<User>  findAll();
 }

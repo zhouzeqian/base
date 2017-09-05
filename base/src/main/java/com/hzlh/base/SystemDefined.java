@@ -4,8 +4,8 @@ public class SystemDefined {
 
 	public static final class ResultCode{
 		//返回成功
-		public static final Integer SUCCESS=1;
+		public static final Boolean SUCCESS=true;
 		//返回失败
-		public static final Integer FAILURE=0;
+		public static final Boolean FAILURE=false;
 	}
 }

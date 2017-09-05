@@ -22,8 +22,8 @@
             <ref bean="myJobDetail" />
         </property>
         <property name="cronExpression">
-            <!--middle night 24. do it  -->
-            <value>*/50 * * * * ?</value>
+            <!--每隔1小时执行一次 -->
+            <value>0 0 0/1 * * ?</value>
         </property>
     </bean>
     <!-- 调度的配置结束 -->
