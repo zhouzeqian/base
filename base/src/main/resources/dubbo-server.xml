@@ -16,11 +16,4 @@
 	<!-- 要暴露的服务接口 -->
 	<dubbo:annotation package="com.hzlh.service" />
 
-	<!-- 消费方应用名，用于计算依赖关系，不是匹配条件，不要与提供方一样 -->
-	<dubbo:application name="dubbo-client" />
-	<!-- 使用multicast广播注册中心暴露发现服务地址 -->
-	<dubbo:registry address="zookeeper://192.1.2.231:2181" />
-	<!-- 生成远程服务代理，可以和本地bean一样使用demoService -->
-	<dubbo:reference id="dubboService" interface="com.hzlh.service.DubboService" />
-
 </beans>
