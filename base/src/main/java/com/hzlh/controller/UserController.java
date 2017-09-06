@@ -14,16 +14,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hzlh.entity.User;
 import com.hzlh.service.UserService;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 /*
  * 带m的要token令牌才能访问 对应spring-security.xml配置 mobile http configuration
  */
 @RequestMapping("/m/user")
-@Api(value = "UserController", description = "用户")
+@Api(description = "用户信息")
 public class UserController {
 	Logger log = LoggerFactory.getLogger(this.getClass());
 	@Resource

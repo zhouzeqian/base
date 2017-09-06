@@ -11,12 +11,13 @@ import com.hzlh.base.ResultBase;
 import com.hzlh.base.SystemDefined;
 import com.hzlh.mq.producer.QueueSender;
 import com.hzlh.mq.producer.TopicSender;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
-@Api(value="ActivemqController",description="消息测试")
+@Api(description="activemq queue和topic两种模式")
 @RequestMapping("/jms")
 public class ActivemqController {
 	@Resource

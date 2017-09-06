@@ -1,0 +1,5 @@
+1.activemq需要官网下载安装,端口设置默认
+2.dubbo需要安装zookeeper,http://blog.csdn.net/lihao21/article/details/51778255
+3.swagger访问地址http://ip:port/base/swagger-ui.html#/
+4.druid访问地址http://ip:port/base/druid/index.html
+5.oauth2的说明文档在oauth2文件夹下面，里面有数据库的表结构说明

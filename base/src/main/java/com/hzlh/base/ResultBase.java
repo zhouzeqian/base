@@ -2,15 +2,12 @@ package com.hzlh.base;
 
 import java.io.Serializable;
 
-import com.wordnik.swagger.annotations.ApiModel;
-import com.wordnik.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="返回结果集")
 public class ResultBase <T> implements Serializable{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@ApiModelProperty(value="返回码")
 	private Boolean code;

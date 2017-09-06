@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hzlh.base.ResultBase;
 import com.hzlh.service.RedisService;
 import com.hzlh.service.UserService;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
-@Api(value="RedisController",description="redis缓存测试")
+@Api(description="redis增删改查")
 @RequestMapping(value="/redis")
 public class RedisController {
 

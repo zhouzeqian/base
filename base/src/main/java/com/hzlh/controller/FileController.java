@@ -18,12 +18,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.hzlh.base.ResultBase;
 import com.hzlh.service.FileService;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
-@Api(value="FileController",description="文件上传下载测试")
+@Api(description="文件上传下载")
 @RequestMapping(value="/file")
 public class FileController {
 	@Autowired

@@ -21,13 +21,14 @@ import com.google.gson.GsonBuilder;
 import com.hzlh.entity.Message;
 import com.hzlh.entity.User;
 import com.hzlh.websocket.MyWebSocketHandler;
-import com.wordnik.swagger.annotations.Api;
-import com.wordnik.swagger.annotations.ApiOperation;
-import com.wordnik.swagger.annotations.ApiParam;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @Controller
 @RequestMapping("/msg")
-@Api(value="MsgController",description="websocket即时通讯测试")
+@Api(description="websocket即时通讯")
 public class MsgController {
 
 	@Resource
