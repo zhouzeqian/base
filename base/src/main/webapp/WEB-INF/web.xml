@@ -8,6 +8,12 @@
 			classpath:applicationContext.xml,
 			classpath:spring-security.xml,
 			classpath:activemq.xml,
+			<!--dubbo 服务端  需要先安装zookeeper http://blog.csdn.net/lihao21/article/details/51778255
+			classpath:dubbo-server.xml,
+			-->
+			<!--dubbo 消费端  需要先安装zookeeper http://blog.csdn.net/lihao21/article/details/51778255
+			classpath:dubbo-client.xml,
+			-->
 			classpath:quartz.xml
 		</param-value>
 	</context-param>
