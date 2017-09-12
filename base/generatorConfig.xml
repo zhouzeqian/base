@@ -5,7 +5,7 @@
 <generatorConfiguration>
 	<!--数据库驱动 -->
 	<classPathEntry
-		location="D:/repository/mysql/mysql-connector-java/6.0.6/mysql-connector-java-6.0.6.jar" />
+		location="D:/repository/mysql/mysql-connector-java/5.1.43/mysql-connector-java-5.1.43.jar" />
 	<context id="DB2Tables" targetRuntime="MyBatis3">
 		<commentGenerator>
 			<property name="suppressDate" value="true" />
@@ -13,7 +13,7 @@
 		</commentGenerator>
 		<!--数据库链接地址账号密码 -->
 		<jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-			connectionURL="jdbc:mysql://localhost:3306/oauth2?serverTimezone=UTC&amp;characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false"
+			connectionURL="jdbc:mysql://localhost:3306/oauth2"
 			userId="root" password="654321">
 		</jdbcConnection>
 		<javaTypeResolver>
