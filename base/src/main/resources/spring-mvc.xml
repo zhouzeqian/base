@@ -25,7 +25,25 @@
 	</context:component-scan>
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<mvc:default-servlet-handler />
-	<mvc:annotation-driven />
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+		<!-- json配置 -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="prefixJson" value="false" />
+				<property name="supportedMediaTypes" value="application/json" />
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="serializationInclusion">
+							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+
+
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
 	<bean
@@ -81,7 +99,7 @@
 			</props>
 		</property>
 	</bean>
-	
+
 	<!-- 全局异常处理 -->
-    <bean id="exceptionHandler" class="com.hzlh.base.DefaultExceptionHandler" />
+	<bean id="exceptionHandler" class="com.hzlh.base.DefaultExceptionHandler" />
 </beans>
