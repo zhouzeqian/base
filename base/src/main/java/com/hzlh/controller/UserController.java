@@ -33,9 +33,9 @@ public class UserController {
 	@RequestMapping(value = "findAll", method = RequestMethod.GET)
 	@ApiOperation(value = "查询所有用户信息", notes = "查询所有用户信息")
 	public List<User> findAll(HttpServletRequest request,
-			@ApiParam(name = "access_token", value = "令牌") @RequestParam(value = "access_token", required = true) String access_token) {
-		log.info("当前请求地址:"+request.getLocalAddr()+":"+request.getLocalPort());
-		System.out.println(request.getServerName()+":"+request.getServerPort());
+			@ApiParam(name = "access_token", value = "令牌(这个可以不用加,只是接口请求的时候要带上这个参数,这里只是为了swagger能用oauth2)") @RequestParam(value = "access_token", required = true) String access_token) {
+		log.info("当前请求地址:" + request.getLocalAddr() + ":" + request.getLocalPort());
+		System.out.println(request.getServerName() + ":" + request.getServerPort());
 		return userService.findAll();
 	}
 

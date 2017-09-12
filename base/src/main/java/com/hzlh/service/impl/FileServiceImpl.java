@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hzlh.base.ResultBase;
 import com.hzlh.base.SystemDefined;
@@ -13,12 +13,12 @@ import com.hzlh.service.FileService;
 public class FileServiceImpl implements FileService{
 
 	@Override
-	public ResultBase<String> upload(CommonsMultipartFile[] files) {
+	public ResultBase<String> upload(MultipartFile[] files) {
 		// TODO Auto-generated method stub
 		ResultBase<String> rb=new ResultBase<String>();
 		rb.setCode(SystemDefined.ResultCode.SUCCESS);
 		rb.setMsg("文件上传成功！");
-			for(CommonsMultipartFile file:files){
+			for(MultipartFile file:files){
 				File f=new File("D:/upload/"+file.getOriginalFilename());
 				try {
 					file.transferTo(f);

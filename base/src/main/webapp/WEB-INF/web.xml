@@ -6,6 +6,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
 			classpath:applicationContext.xml,
+			<!-- 这是oauth2的配置,测试接口的时候可以不用加 -->
 			classpath:spring-security.xml,
 			classpath:activemq.xml,
 			<!--dubbo 服务端  需要先安装zookeeper http://blog.csdn.net/lihao21/article/details/51778255
