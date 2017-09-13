@@ -165,6 +165,55 @@ INSERT INTO `oauth_refresh_token` VALUES ('2017-09-06 06:54:37','3dd9989344db360
 UNLOCK TABLES;
 
 --
+-- Table structure for table `permission`
+--
+
+DROP TABLE IF EXISTS `permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `permission_name` varchar(100) NOT NULL COMMENT '权限名称',
+  `rid` int(11) NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `permission`
+--
+
+LOCK TABLES `permission` WRITE;
+/*!40000 ALTER TABLE `permission` DISABLE KEYS */;
+INSERT INTO `permission` VALUES (1,'add',1),(2,'delete',1),(3,'update',1),(4,'query',1),(5,'query',2),(6,'query',3);
+/*!40000 ALTER TABLE `permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `role`
+--
+
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(20) DEFAULT NULL COMMENT '角色',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `role`
+--
+
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'admin'),(2,'manager'),(3,'normal');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_`
 --
 
@@ -194,7 +243,7 @@ CREATE TABLE `user_` (
 
 LOCK TABLES `user_` WRITE;
 /*!40000 ALTER TABLE `user_` DISABLE KEYS */;
-INSERT INTO `user_` VALUES (21,'29f6004fb1b0466f9572b02bf2ac1be8','2017-09-05 15:09:42',0,'admin@wdcy.cc','21232f297a57a5a743894a0e4a801fc3','028-1234567','admin',1,NULL),(22,'55b713df1c6f423e842ad68668523c49','2017-09-05 15:09:43',0,'unity@wdcy.cc','439b3a25b555b3bc8667a09a036ae70c','','unity',0,NULL),(23,'612025cb3f964a64a48bbdf77e53c2c1','2017-09-05 15:09:43',0,'mobile@wdcy.cc','532c28d5412dd75bf975fb951c740a30','','mobile',0,NULL);
+INSERT INTO `user_` VALUES (21,'29f6004fb1b0466f9572b02bf2ac1be8','2017-09-13 15:36:58',0,'admin@wdcy.cc','21232f297a57a5a743894a0e4a801fc3','028-1234567','admin',1,'2017-09-13 08:45:02'),(22,'55b713df1c6f423e842ad68668523c49','2017-09-05 15:09:43',0,'unity@wdcy.cc','439b3a25b555b3bc8667a09a036ae70c','','unity',0,NULL),(23,'612025cb3f964a64a48bbdf77e53c2c1','2017-09-05 15:09:43',0,'mobile@wdcy.cc','532c28d5412dd75bf975fb951c740a30','','mobile',0,'2017-09-13 08:45:38');
 /*!40000 ALTER TABLE `user_` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,6 +272,31 @@ INSERT INTO `user_privilege` VALUES (22,'UNITY'),(23,'MOBILE');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `user_role`
+--
+
+DROP TABLE IF EXISTS `user_role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user_role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` int(11) NOT NULL COMMENT '用户ID',
+  `rid` int(11) NOT NULL COMMENT '角色ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `user_role`
+--
+
+LOCK TABLES `user_role` WRITE;
+/*!40000 ALTER TABLE `user_role` DISABLE KEYS */;
+INSERT INTO `user_role` VALUES (1,21,1),(2,22,2),(3,23,3);
+/*!40000 ALTER TABLE `user_role` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Dumping routines for database 'oauth2'
 --
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -235,4 +309,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-12 17:10:29
+-- Dump completed on 2017-09-13 16:50:13

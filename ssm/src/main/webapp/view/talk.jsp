@@ -12,8 +12,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script type="text/javascript"
-	src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!-- 新 Bootstrap 核心 CSS 文件 -->
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+ 
+<!-- 可选的Bootstrap主题文件（一般不使用） -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
+ 
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+ 
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 <style>
 textarea {
 	height: 300px;
@@ -25,7 +35,7 @@ textarea {
 input[type=button] {
 	float: right;
 	margin: 5px;
-	width: 50px;
+	width: 100px;
 	height: 35px;
 	border: none;
 	color: white;
@@ -45,6 +55,10 @@ input[type=button] {
 	background: blue;
 }
 
+.find {
+	background: #BDB76B;
+}
+
 .clear:active {
 	background: yellow;
 }
@@ -57,6 +71,10 @@ input[type=button] {
 	background: yellow;
 }
 
+.find:active {
+	background: yellow;
+}
+
 .msg {
 	width: 100%;
 	height: 25px;
@@ -66,7 +84,7 @@ input[type=button] {
 #content {
 	border: 1px solid gray;
 	width: 100%;
-	height: 400px;
+	height: 300px;
 	overflow-y: scroll;
 }
 
@@ -271,6 +289,19 @@ input[type=button] {
 			function clearAll(){
 				$("#content").empty();
 			}
+			
+			function find(){
+				$.ajax({
+					type:'GET',
+					url:'/ssm/user/find',
+					data:{id:uid},
+					dataType: "json",
+					success:function(data){
+						$('#userInfo').empty();
+						$('#userInfo').append("<tr><td>"+data.id+"</td><td>"+data.username+"</td><td>"+data.email+"</td><td>"+data.lastLoginTime+"</td></tr>")
+					}
+				});
+			}
 		</script>
 </head>
 <body>
@@ -283,5 +314,21 @@ input[type=button] {
 	<input type="button" value="发送" class="send" onclick="send()">
 	<input type="button" value="群发" class="sendAll" onclick="sendAll()">
 	<input type="button" value="清空" class="clear" onclick="clearAll()">
+	<!-- 这里只有配置角色为admin的才能访问 ,参照spring-shiro里权限配置-->
+	<input type="button" value="获取用户信息" class="find" onclick="find()">
+	<br>
+	<table class="table table-striped">
+		<caption>用户信息</caption>
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>用户名</th>
+				<th>邮箱</th>
+				<th>登录时间</th>
+			</tr>
+		</thead>
+		<tbody id="userInfo">
+		</tbody>
+	</table>
 </body>
 </html>

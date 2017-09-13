@@ -10,8 +10,8 @@
                         http://www.springframework.org/schema/mvc  
                         http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
 
-	
-	
+
+
 	<!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
 	<context:component-scan base-package="com.llc.controller">
 		<context:include-filter type="annotation"
@@ -21,7 +21,26 @@
 	</context:component-scan>
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<mvc:default-servlet-handler />
-	<mvc:annotation-driven/>
+	<mvc:annotation-driven>
+		<mvc:message-converters register-defaults="true">
+			<!-- json配置 -->
+			<bean
+				class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="prefixJson" value="false" />
+				<property name="supportedMediaTypes" value="application/json" />
+				<property name="objectMapper">
+					<bean class="com.fasterxml.jackson.databind.ObjectMapper">
+						<property name="serializationInclusion">
+							<value type="com.fasterxml.jackson.annotation.JsonInclude.Include">NON_NULL</value>
+						</property>
+						<property name="dateFormat">
+							<value type="java.text.SimpleDateFormat">yyyy-MM-dd HH:mm:ss</value>
+						</property>
+					</bean>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
 
 	<!-- 定义跳转的文件的前后缀 ，视图模式配置 -->
 	<bean
@@ -41,8 +60,8 @@
 		<!-- 内存中的最大值 -->
 		<property name="maxInMemorySize" value="40960" />
 	</bean>
-	
+
 	<!-- 全局异常处理 -->
-    <bean id="exceptionHandler" class="com.llc.base.DefaultExceptionHandler" />
-	
+	<bean id="exceptionHandler" class="com.llc.base.DefaultExceptionHandler" />
+
 </beans>
