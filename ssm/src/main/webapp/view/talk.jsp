@@ -1,10 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getServerName() + ":"
-			+ request.getServerPort() + path + "/";
-	String basePath2 = request.getScheme() + "://"
-			+ request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";
+	String basePath2 = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -14,7 +12,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript"
+	src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
 <style>
 textarea {
 	height: 300px;
@@ -42,11 +41,19 @@ input[type=button] {
 	background: green;
 }
 
+.sendAll {
+	background: blue;
+}
+
 .clear:active {
 	background: yellow;
 }
 
 .send:active {
+	background: yellow;
+}
+
+.sendAll:active {
 	background: yellow;
 }
 
@@ -156,9 +163,19 @@ input[type=button] {
 		websocket.onmessage = function(event) {
 			var data=JSON.parse(event.data);
 			console.log("WebSocket:收到一条消息",data);
-			var textCss=data.from==-1?"sfmsg_text":"fmsg_text";
-			$("#content").append("<div class='fmsg'><label class='name'>"+data.fromName+"&nbsp;"+data.sendTime+"</label><div class='"+textCss+"'>"+data.msgContent+"</div></div>");
-			scrollToBottom();
+			if(data.onlineUsers!=null){
+				$('#uid').empty();
+				$.each(data.onlineUsers, function(i, item) {
+		            $('#uid').append("<option value='"+item.uid+"'>"+item.name+"</option>");
+		        });
+			}else{
+				if(uid!=data.fromId){
+					var textCss=data.fromId==-1?"sfmsg_text":"fmsg_text";
+					$("#content").append("<div class='fmsg'><label class='name'>"+data.fromName+"&nbsp;"+data.sendTime+"</label><div class='"+textCss+"'>"+data.msgContent+"</div></div>");
+					scrollToBottom();
+				}
+			}
+			
 		};
 		websocket.onerror = function(event) {
 			console.log("WebSocket:发生错误 ");
@@ -217,7 +234,7 @@ input[type=button] {
 					$("#content").append("<div class='tmsg'><label class='name'>我&nbsp;"+new Date().Format("yyyy-MM-dd hh:mm:ss")+"</label><div class='tmsg_text'>"+$('#msg').val()+"</div></div>");
 					$.ajax({
 						type:'POST',
-						url:'push',
+						url:'/ssm/ws/push',
 						data:{mid:uid,uid:$('#uid').val(),text:text},
 						dataType: "json",
 						success:function(data){
@@ -229,21 +246,42 @@ input[type=button] {
 				}
 			
 			
+			function sendAll(){
+				//sendMsg();   
+				var text=$('#msg').val();
+				if(text==null||$.trim(text)==""){
+					$('#msg').val(null);
+					$('#msg').attr("placeholder","消息内容不能为空或空字符串！");
+				}
+				else{
+				$("#content").append("<div class='tmsg'><label class='name'>我&nbsp;"+new Date().Format("yyyy-MM-dd hh:mm:ss")+"</label><div class='tmsg_text'>"+$('#msg').val()+"</div></div>");
+				$.ajax({
+					type:'POST',
+					url:'/ssm/ws/broadcast',
+					data:{mid:uid,text:text},
+					dataType: "json",
+					success:function(data){
+						
+					}
+				});
+				$("#msg").val("");
+				}
+			}
+			
 			function clearAll(){
 				$("#content").empty();
 			}
 		</script>
 </head>
 <body>
-	欢迎：${name}
+	${name}已上线
 	<div id="content"></div>
 	<input type="text" placeholder="请输入要发送的信息" id="msg" class="msg">
-	发送给：<select id="uid">
-			<option value="1">张三</option>
-			<option value="2">李四</option>
-			<option value="3">王五</option>
-		</select>
-	<input type="button" value="发送" class="send" onclick="send()" >
+	发送给：
+	<select id="uid">
+	</select>
+	<input type="button" value="发送" class="send" onclick="send()">
+	<input type="button" value="群发" class="sendAll" onclick="sendAll()">
 	<input type="button" value="清空" class="clear" onclick="clearAll()">
 </body>
 </html>

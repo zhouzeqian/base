@@ -74,10 +74,11 @@ public class WebSocketController {
 	@ResponseBody
 	@RequestMapping(value = "broadcast", method = RequestMethod.POST)
 	@ApiOperation(value = "推送给所有用户", notes = "推送给所有用户")
-	public void broadcast(@ApiParam(value = "消息内容") @RequestParam(value = "text") String text) throws IOException {
+	public void broadcast(@ApiParam(value = "自己ID") @RequestParam(value = "mid") Integer mid,
+			@ApiParam(value = "消息内容") @RequestParam(value = "text") String text) throws IOException {
 		Message msg = new Message();
-		msg.setFromId(-1);
-		msg.setFromName("系统");
+		msg.setFromId(mid);
+		msg.setFromName(JSON.parseObject(redisClient.get(mid.toString())).getString("username"));
 		msg.setMsgContent(text);
 		msg.setToId(0);
 		msg.setToName("所有用户");

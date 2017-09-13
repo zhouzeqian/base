@@ -1,6 +1,7 @@
 package com.llc.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.llc.entity.User;
 
@@ -17,5 +18,5 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     
-    List<User> findUser(String username,String password);
+    List<User> findUser(Map<String,Object> map);
 }
