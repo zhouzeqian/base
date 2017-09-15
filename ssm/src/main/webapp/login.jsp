@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -56,6 +57,15 @@
       <button type="button" onclick="login()" class="btn btn-default">登录</button>
     </div>
   </div>
+  
+  <c:if test="${message!=null}">
+  <div class="alert alert-danger">
+    <a href="#" class="close" data-dismiss="alert">
+        &times;
+    </a>
+    <strong>${message}</strong>
+</div>
+</c:if>
 </form>
 </body>
 

@@ -40,17 +40,17 @@ public class UserController {
 			subject.login(token);
 		} catch (IncorrectCredentialsException ice) {
 			// 捕获密码错误异常
-			ModelAndView mv = new ModelAndView("error");
+			ModelAndView mv = new ModelAndView("login");
 			mv.addObject("message", "密码错误!");
 			return mv;
 		} catch (UnknownAccountException uae) {
 			// 捕获未知用户名异常
-			ModelAndView mv = new ModelAndView("error");
+			ModelAndView mv = new ModelAndView("login");
 			mv.addObject("message", "用户名错误!");
 			return mv;
 		} catch (ExcessiveAttemptsException eae) {
 			// 捕获错误登录过多的异常
-			ModelAndView mv = new ModelAndView("error");
+			ModelAndView mv = new ModelAndView("login");
 			mv.addObject("message", "登录次数过多");
 			return mv;
 		}
@@ -62,12 +62,19 @@ public class UserController {
 		// 存在redis里面
 		if (redisClient.get(user.getId().toString()) == null)
 			redisClient.set(user.getId().toString(), JSON.toJSONString(user));
-		ModelAndView mav = new ModelAndView("talk");
+		ModelAndView mav = new ModelAndView("view/talk");
 		mav.addObject("uid", user.getId());
 		mav.addObject("name", user.getUsername());
-		mav.setViewName("talk");
 		return mav;
 	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.POST)    
+    public ModelAndView logout() {  
+        Subject currentUser = SecurityUtils.getSubject();  
+        currentUser.logout();  
+        ModelAndView mav = new ModelAndView("login");
+        return mav;  
+    }  
 
 	@RequestMapping(value = "delete")
 	public Integer delete(Integer id) {
