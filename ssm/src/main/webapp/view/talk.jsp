@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -305,8 +306,8 @@ input[type=button] {
 		</script>
 </head>
 <body>
-	${name}已上线
-	<div id="content"></div>
+	<h5>${name}已上线 <span><a href="/ssm/user/logout">退出</a></span></h5>
+	<div id="content"></div>	
 	<input type="text" placeholder="请输入要发送的信息" id="msg" class="msg">
 	发送给：
 	<select id="uid">
@@ -315,7 +316,9 @@ input[type=button] {
 	<input type="button" value="群发" class="sendAll" onclick="sendAll()">
 	<input type="button" value="清空" class="clear" onclick="clearAll()">
 	<!-- 这里只有配置角色为admin的才能访问 ,参照spring-shiro里权限配置-->
+	<shiro:hasRole name="admin">
 	<input type="button" value="获取用户信息" class="find" onclick="find()">
+	</shiro:hasRole>
 	<br>
 	<table class="table table-striped">
 		<caption>用户信息</caption>

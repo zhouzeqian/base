@@ -14,15 +14,20 @@
                         http://www.springframework.org/schema/task  
                         http://www.springframework.org/schema/task/spring-task-4.3.xsd">
 	<!-- 继承自AuthorizingRealm的自定义Realm,即指定Shiro验证用户登录的类为自定义的ShiroDbRealm.java -->
-	<bean id="myRealm" class="com.llc.shiro.MyRealm" />
+	<bean id="myRealm" class="com.llc.shiro.MyRealm">
+		<property name="credentialsMatcher" ref="credentialsMatcher" />
+		<property name="cachingEnabled" value="false" />
+	</bean>
 
 	<!-- Shiro默认会使用Servlet容器的Session,可通过sessionMode属性来指定使用Shiro原生Session -->
 	<!-- 即<property name="sessionMode" value="native"/>,详细说明见官方文档 -->
 	<!-- 这里主要是设置自定义的单Realm应用,若有多个Realm,可使用'realms'属性代替 -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<property name="realm" ref="myRealm" />
-		<!-- 缓存管理器 -->  
-        <property name="cacheManager" ref="cacheManager"/>  
+		<!-- 缓存管理器 -->
+		<property name="cacheManager" ref="cacheManager" />
+		<!-- shiro session管理器 -->
+		<property name="sessionManager" ref="sessionManager"></property>
 	</bean>
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -30,7 +35,7 @@
 		<property name="securityManager" ref="securityManager" />
 		<!-- 登录地址 -->
 		<property name="loginUrl" value="/login.jsp" />
-		<!-- 登录后跳转到业务页面-->
+		<!-- 登录后跳转到业务页面 -->
 		<property name="successUrl" value="/view/talk.jsp" />
 		<!-- 错误页面 -->
 		<property name="unauthorizedUrl" value="/error.jsp" />
@@ -51,8 +56,56 @@
 		</property>
 	</bean>
 
+	<!-- 会话ID生成器 -->
+	<bean id="sessionIdGenerator"
+		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+	<!-- 会话DAO -->
+	<bean id="sessionDAO"
+		class="org.apache.shiro.session.mgt.eis.EnterpriseCacheSessionDAO">
+		<property name="sessionIdGenerator" ref="sessionIdGenerator" />
+	</bean>
+	<!-- 会话Cookie模板 关闭浏览器立即失效 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="sid" />
+		<property name="httpOnly" value="true" />
+		<property name="maxAge" value="-1" />
+	</bean>
+	<!-- 会话验证调度器，每30分钟执行一次验证 ，设定会话超时及保存 -->
+	<bean name="sessionValidationScheduler"
+		class="org.apache.shiro.session.mgt.ExecutorServiceSessionValidationScheduler">
+		<property name="interval" value="1800000" />
+		<property name="sessionManager" ref="sessionManager" />
+	</bean>
+	<!-- 会话管理器 -->
+	<bean id="sessionManager"
+		class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		<!-- 全局会话超时时间（单位毫秒），默认30分钟 -->
+		<property name="globalSessionTimeout" value="1800000" />
+		<property name="deleteInvalidSessions" value="true" />
+		<property name="sessionValidationSchedulerEnabled" value="true" />
+		<property name="sessionValidationScheduler" ref="sessionValidationScheduler" />
+		<property name="sessionDAO" ref="sessionDAO" />
+		<property name="sessionIdCookieEnabled" value="true" />
+		<property name="sessionIdCookie" ref="sessionIdCookie" />
+	</bean>
+	<!-- 凭证匹配器 -->
+	<bean id="credentialsMatcher" class="com.llc.shiro.RetryLimitHashedCredentialsMatcher">
+		<constructor-arg ref="cacheManager" />
+		<property name="hashAlgorithmName" value="md5" />
+		<property name="hashIterations" value="1" />
+		<property name="storedCredentialsHexEncoded" value="true" />
+	</bean>
 
-	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+	<!-- 缓存管理器开始 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManager" ref="ehCacheManager" />
+	</bean>
+	<bean id="ehCacheManager"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+		<property name="shared" value="true"></property>
+	</bean>
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
 </beans>

@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -24,8 +25,6 @@
 </head>
 <script type="text/javascript">
 	function login(){
-		var pw=md5($('#password').val());
-		$('#password').val(pw);
 		$("form").submit();
 	}
 </script>

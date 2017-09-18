@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.ConcurrentAccessException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -53,6 +54,11 @@ public class UserController {
 			ModelAndView mv = new ModelAndView("login");
 			mv.addObject("message", "登录次数过多");
 			return mv;
+		}  catch (ConcurrentAccessException e) {
+			// 一个用户多次登录异常：不允许多次登录，只能登录一次 。即不允许多处登录
+			ModelAndView mv = new ModelAndView("login");
+			mv.addObject("message", "该帐号已登录");
+			return mv;
 		}
 		User user = userService.findByName(username);
 		user.setLastLoginTime(new Date());
@@ -67,14 +73,14 @@ public class UserController {
 		mav.addObject("name", user.getUsername());
 		return mav;
 	}
-	
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)    
-    public ModelAndView logout() {  
-        Subject currentUser = SecurityUtils.getSubject();  
-        currentUser.logout();  
-        ModelAndView mav = new ModelAndView("login");
-        return mav;  
-    }  
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public ModelAndView logout() {
+		Subject currentUser = SecurityUtils.getSubject();
+		currentUser.logout();
+		ModelAndView mav = new ModelAndView("login");
+		return mav;
+	}
 
 	@RequestMapping(value = "delete")
 	public Integer delete(Integer id) {
