@@ -28,6 +28,8 @@
 		<property name="cacheManager" ref="cacheManager" />
 		<!-- shiro session管理器 -->
 		<property name="sessionManager" ref="sessionManager"></property>
+		<!-- 记住密码 -->
+		<property name="rememberMeManager" ref="rememberMeManager" />
 	</bean>
 
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
@@ -105,6 +107,19 @@
 		<property name="configLocation" value="classpath:ehcache.xml" />
 		<property name="shared" value="true"></property>
 	</bean>
+	
+	<!-- remenberMe配置 -->
+   <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+       <constructor-arg value="rememberMe" />
+       <property name="httpOnly" value="true" />
+       <!-- 默认记住7天（单位：秒） -->
+       <property name="maxAge" value="604800" />
+   </bean>
+   <!-- rememberMe管理器 -->
+   <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+       <property name="cipherKey" value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+       <property name="cookie" ref="rememberMeCookie" />
+   </bean>
 	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
 
