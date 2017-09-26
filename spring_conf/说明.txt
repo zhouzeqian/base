@@ -1,0 +1,5 @@
+该项目为无xml配置项目，所有配置均用的注解（在conf包下面）
+1.DataConfig为数据源配置
+2.ApplicationConfig就是application.xml
+3.SpringMvcConfig就是springmvc.xml
+4.WebAppInitializer就是web.xml
