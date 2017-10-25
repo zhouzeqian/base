@@ -3,14 +3,7 @@
 <!DOCTYPE html >
 <link rel="stylesheet" href="css/zTreeStyle/zTreeStyle.css" />
 <link rel="stylesheet" href="css/demo.css" type="text/css">
-<!-- 新 Bootstrap 核心 CSS 文件 -->
-<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-<!-- 可选的Bootstrap主题文件（一般不使用） -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
-<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="js/jquery.ztree.excheck.js"></script>
 <script type="text/javascript" src="js/jquery.ztree.exedit.js"></script>
@@ -253,6 +246,9 @@
 		onloadZTree();
 	});
 </SCRIPT>
+<style type="text/css">
+.ztree li span.button.add {margin-left:2px; margin-right: -1px; background-position:-144px 0; vertical-align:top; *vertical-align:middle}
+	</style>
 </head>
 <body>
 <h1>zTree高级功能测试</h1>
