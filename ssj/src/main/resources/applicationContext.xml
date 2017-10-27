@@ -56,6 +56,7 @@
 		<property name="poolPreparedStatements" value="true" />
 		<property name="maxPoolPreparedStatementPerConnectionSize"
 			value="20" />
+		<property name="connectionProperties" value="config.decrypt=true;config.decrypt.key=${jdbc.publicKey}"></property>
 	</bean>
 
 	<!-- 定义实体管理器工厂 Jpa配置 LocalContainerEntityManagerFactoryBean这个选项Spring扮演了容器的角色。完全掌管JPA -->
