@@ -102,4 +102,25 @@
 	<!-- 开启注解事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"
 		proxy-target-class="true" />
+		
+		<!-- spring 线程池 -->           
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- 线程池维护线程的最少数量 -->
+        <property name="corePoolSize" value="3" />
+        <!-- 允许的空闲时间 -->
+        <property name="keepAliveSeconds" value="200" />
+        <!-- 线程池维护线程的最大数量 -->
+        <property name="maxPoolSize" value="5" />
+        <!-- 缓存队列 -->
+        <property name="queueCapacity" value="10" />
+        <!-- 对拒绝task的处理策略 -->
+        <property name="rejectedExecutionHandler">
+            <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+        </property>
+    </bean>
+    <bean id="multiThreadUtil" class="com.kxll.util.MultiThreadUtil">
+    	<property name="taskExecutor" ref="taskExecutor"></property>
+    </bean>
+    
+    <bean id="multiThread" class="com.kxll.base.MultiThread"></bean>
 </beans>
