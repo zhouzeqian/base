@@ -34,7 +34,11 @@ public class AddressController {
 	}
 	
 	@RequestMapping("add")
-	public Integer add(Address address) {
+	public Integer add(Integer type,Integer parentId,String name) {
+		Address address=new Address();
+		address.setType(type);
+		address.setParentId(parentId);
+		address.setName(name);
 		address.setCreateTime(new Date());
 		address.setIsDel(0);
 		addressService.add(address);
