@@ -13,8 +13,6 @@
 	<context:component-scan base-package="com.llc.controller">
 		<context:include-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
 	</context:component-scan>
 	<!--避免IE执行AJAX时，返回JSON出现下载文件 -->
 	<mvc:default-servlet-handler />

@@ -39,7 +39,6 @@ public class ActivitiController {
         log.info(task.toString());
         Task task1 = task.get(0);
         map.put("第一环节", task1.getId()+"  "+task1.getName());
-
         taskService.complete(task1.getId());
         task1 = taskService.createTaskQuery().executionId(task1.getExecutionId()).singleResult();
         map.put("第二环节", task1.getId()+"  "+task1.getName());

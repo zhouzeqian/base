@@ -18,7 +18,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableWebMvc
 @EnableSwagger2
-@ComponentScan(basePackages = { "com.hzlh.controller", "com.hzlh.base", "com.hzlh.entity" })
+@ComponentScan(basePackages = { "com.llc.controller", "com.llc.base", "com.llc.entity" })
 public class Swagger2 {
 
 	@Bean

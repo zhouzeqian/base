@@ -27,7 +27,7 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public void delete(Integer id) {
 		// TODO Auto-generated method stub
-		addressDao.delete(id);
+		addressDao.deleteById(id);
 	}
 
 	@Override

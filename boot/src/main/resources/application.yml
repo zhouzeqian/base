@@ -29,3 +29,5 @@ spring:
       min-idle: 1
       max-active: 100
       max-wait: -1
+server:
+  port: 8888

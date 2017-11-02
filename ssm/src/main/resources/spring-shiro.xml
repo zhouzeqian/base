@@ -47,13 +47,21 @@
 				<!-- anon无权限访问请求，此处是登录页面和登录请求 -->
 				/user/login=anon
 				/ws/**=anon
+				/druid/**=anon
+				/css/**=anon
+				/js/**=anon
+				/images/** = anon
+				/v2/**=anon
+				/webjars/**=anon
+				/swagger-ui.html#!/**=anon
 				<!-- 需要权限为add的用户才能访问此请求 -->
 				/user/add=perms[user:add]
 				<!-- 需要管理员角色才能访问此页面 -->
 				/user/find=roles[admin]
 				/user/delete=roles[admin]
-				<!--拦截非静态资源的所有请求 -->
-				/** = authc
+				<!--拦截非静态资源的所有请求-->
+				/** = authc 
+				
 			</value>
 		</property>
 	</bean>
