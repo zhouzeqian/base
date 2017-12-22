@@ -125,7 +125,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.39</version>
+			<version>1.2.40</version>
 		</dependency>
 		<!-- 映入JSON -->
 		<dependency>

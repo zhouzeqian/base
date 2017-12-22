@@ -7,10 +7,17 @@
  */
 package com.llc.base;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="返回参数")
 public class BaseResult<T> {
 
+	@ApiModelProperty(value="返回编码")
 	private String code;
+	@ApiModelProperty(value="返回信息")
 	private String msg;
+	@ApiModelProperty(value="返回对象")
 	private T obj;
 
 	

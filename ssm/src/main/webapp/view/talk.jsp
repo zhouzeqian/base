@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getServerName() + ":" + request.getServerPort() + path + "/";

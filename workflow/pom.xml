@@ -6,7 +6,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
 		<!-- spring版本号 -->
-		<spring.version>4.3.11.RELEASE</spring.version>
+		<spring.version>5.0.1.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.4.5</mybatis.version>
 		<!-- log4j日志文件管理包 -->
@@ -95,7 +95,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.38</version>
+			<version>1.2.40</version>
 		</dependency>
 		<!-- mybatis核心包 -->
 		<dependency>
@@ -120,7 +120,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.1.2</version>
+			<version>1.1.5</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
 		<dependency>

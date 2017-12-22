@@ -19,15 +19,20 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20 
+    logSlowSql: true
+    removeAbandoned: true
+    removeAbandonedTimeout: 1800
+    logAbandoned: true
     
   redis:
-    host: localhost
-    password: 
+    host: 10.10.15.27
+    password: kxll.com
     port: 6379
     pool: 
       max-idle: 100
       min-idle: 1
       max-active: 100
       max-wait: -1
+  
 server:
   port: 8888
