@@ -8,8 +8,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.Resource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
@@ -26,6 +29,8 @@ import com.llc.entity.Message;
 @Component
 public class SystemWebSocketHandler implements WebSocketHandler {
 	private Logger log = LoggerFactory.getLogger(SystemWebSocketHandler.class);
+	@Resource
+	private ThreadPoolTaskExecutor taskExecutor;
 
 	public static final HashMap<Integer, WebSocketSession> userSocketSessionMap = Maps.newHashMap();
 
@@ -127,31 +132,19 @@ public class SystemWebSocketHandler implements WebSocketHandler {
 	 * @throws IOException
 	 */
 	public void broadcast(final TextMessage message) throws IOException {
-		Iterator<Entry<Integer, WebSocketSession>> it = userSocketSessionMap.entrySet().iterator();
-
-		// 多线程群发
-		while (it.hasNext()) {
-
-			final Entry<Integer, WebSocketSession> entry = it.next();
-
-			if (entry.getValue().isOpen()) {
-				// entry.getValue().sendMessage(message);
-				new Thread(new Runnable() {
-
-					public void run() {
-						try {
-							if (entry.getValue().isOpen()) {
-								entry.getValue().sendMessage(message);
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
+		// 线程池多线程群发 lambda表达式
+		userSocketSessionMap.entrySet().forEach(userOnline -> {
+			taskExecutor.execute(new Thread(() -> {
+				if (userOnline.getValue().isOpen()) {
+					try {
+						userOnline.getValue().sendMessage(message);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
-
-				}).start();
-			}
-
-		}
+				}
+			}));
+		});
 	}
 
 	/**

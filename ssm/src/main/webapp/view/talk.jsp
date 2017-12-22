@@ -298,6 +298,7 @@ input[type=button] {
 					data:{id:uid},
 					dataType: "json",
 					success:function(data){
+						alert(data);
 						$('#userInfo').empty();
 						$('#userInfo').append("<tr><td>"+data.id+"</td><td>"+data.username+"</td><td>"+data.email+"</td><td>"+data.lastLoginTime+"</td></tr>")
 					}

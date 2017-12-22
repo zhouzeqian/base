@@ -7,7 +7,7 @@
 	<packaging>war</packaging>
 	<properties>
 		<!-- spring版本号 -->
-		<spring.version>5.0.1.RELEASE</spring.version>
+		<spring.version>5.0.2.RELEASE</spring.version>
 		<!-- mybatis版本号 -->
 		<mybatis.version>3.4.5</mybatis.version>
 		<!-- log4j日志文件管理包版本 -->
@@ -115,7 +115,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>druid</artifactId>
-			<version>1.1.5</version>
+			<version>1.1.6</version>
 		</dependency>
 
 		<dependency>
@@ -166,7 +166,7 @@
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.40</version>
+			<version>1.2.44</version>
 		</dependency>
 		<!-- 映入JSON -->
 		<dependency>
@@ -232,7 +232,7 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>23.4-jre</version>
+			<version>23.6-jre</version>
 		</dependency>
 		<!-- redis -->
 		<dependency>
