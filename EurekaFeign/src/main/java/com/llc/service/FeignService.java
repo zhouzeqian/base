@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.llc.entity.Message;
 
-@FeignClient(value = "service-client")
+@FeignClient(value = "service-client",fallback=MyHystrix.class)
 public interface FeignService {
 	@RequestMapping(value = "/test/getMsg", method = RequestMethod.GET)
 	public Message getMsg(@RequestBody Message msg);
