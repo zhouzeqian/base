@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxll.mapper.PinganNotifyRecordsMapper">
+  <resultMap id="BaseResultMap" type="com.kxll.entity.PinganNotifyRecords">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="ord_id" jdbcType="VARCHAR" property="ordId" />
+    <result column="ord_no" jdbcType="VARCHAR" property="ordNo" />
+    <result column="status" jdbcType="SMALLINT" property="status" />
+    <result column="amount" jdbcType="VARCHAR" property="amount" />
+    <result column="pay_time" jdbcType="VARCHAR" property="payTime" />
+    <result column="trade_type" jdbcType="VARCHAR" property="tradeType" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ord_id, ord_no, status, amount, pay_time, trade_type, open_id, create_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pingan_notify_records
+    where id = #{id}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from pingan_notify_records
+    where id = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.kxll.entity.PinganNotifyRecords">
+    insert into pingan_notify_records (id, ord_id, ord_no, 
+      status, amount, pay_time, 
+      trade_type, open_id, create_time
+      )
+    values (#{id}, #{ordId}, #{ordNo}, 
+      #{status}, #{amount}, #{payTime}, 
+      #{tradeType}, #{openId}, #{createTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kxll.entity.PinganNotifyRecords">
+    insert into pingan_notify_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ordId != null">
+        ord_id,
+      </if>
+      <if test="ordNo != null">
+        ord_no,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="payTime != null">
+        pay_time,
+      </if>
+      <if test="tradeType != null">
+        trade_type,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id},
+      </if>
+      <if test="ordId != null">
+        #{ordId},
+      </if>
+      <if test="ordNo != null">
+        #{ordNo},
+      </if>
+      <if test="status != null">
+        #{status},
+      </if>
+      <if test="amount != null">
+        #{amount},
+      </if>
+      <if test="payTime != null">
+        #{payTime},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType},
+      </if>
+      <if test="openId != null">
+        #{openId},
+      </if>
+      <if test="createTime != null">
+        #{createTime},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kxll.entity.PinganNotifyRecords">
+    update pingan_notify_records
+    <set>
+      <if test="ordId != null">
+        ord_id = #{ordId},
+      </if>
+      <if test="ordNo != null">
+        ord_no = #{ordNo},
+      </if>
+      <if test="status != null">
+        status = #{status},
+      </if>
+      <if test="amount != null">
+        amount = #{amount},
+      </if>
+      <if test="payTime != null">
+        pay_time = #{payTime},
+      </if>
+      <if test="tradeType != null">
+        trade_type = #{tradeType},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime},
+      </if>
+    </set>
+    where id = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kxll.entity.PinganNotifyRecords">
+    update pingan_notify_records
+    set ord_id = #{ordId},
+      ord_no = #{ordNo},
+      status = #{status},
+      amount = #{amount},
+      pay_time = #{payTime},
+      trade_type = #{tradeType},
+      open_id = #{openId},
+      create_time = #{createTime}
+    where id = #{id}
+  </update>
+  
+  
+  <select id="find" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from pingan_notify_records
+    <where>
+    	<if test="ordNo != null and ordNo!=''">
+        ord_no like '%' || #{ordNo} || '%'
+      </if>
+      <if test="status != null">
+        and status = #{status}
+      </if>
+    </where>
+    order by id asc
+  </select>
+</mapper>
