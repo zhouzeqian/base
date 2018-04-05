@@ -2,6 +2,8 @@ package com.llc.entity;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Message {
 	// 发送者
 	public Long from;
@@ -12,6 +14,7 @@ public class Message {
 	// 发送的文本
 	public String text;
 	// 发送日期
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	public Date date;
 
 	public Long getFrom() {
