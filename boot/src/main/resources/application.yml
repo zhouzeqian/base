@@ -25,8 +25,8 @@ spring:
     logAbandoned: true
     
   redis:
-    host: 10.10.15.27
-    password: kxll.com
+    host: 127.0.0.1
+    password: 
     port: 6379
     pool: 
       max-idle: 100
