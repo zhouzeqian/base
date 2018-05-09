@@ -19,7 +19,13 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20 
-    
+  rabbitmq:
+      host: localhost
+      port: 5672
+      username: guest
+      password: guest
+      publisher-confirms: true
+      virtual-host: /
 mybatis:   
   mapperLocations: classpath*:com/llc/mapping/*.xml  
   typeAliasesPackage: com.llc.entity  
