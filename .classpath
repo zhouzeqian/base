@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="base/src/main/java"/>
+	<classpathentry kind="src" path="boot/src/main/java"/>
+	<classpathentry kind="src" path="EurekaClient/src/main/java"/>
+	<classpathentry kind="src" path="EurekaFeign/src/main/java"/>
+	<classpathentry kind="src" path="EurekaServer/src/main/java"/>
+	<classpathentry kind="src" path="metronic/src/main/java"/>
+	<classpathentry kind="src" path="sbm/src/main/java"/>
+	<classpathentry kind="src" path="spring_conf/src/main/java"/>
+	<classpathentry kind="src" path="ssj/src/main/java"/>
+	<classpathentry kind="src" path="ssm/src/main/java"/>
+	<classpathentry kind="src" path="workflow/src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
