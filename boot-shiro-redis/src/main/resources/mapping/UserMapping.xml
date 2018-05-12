@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxll.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.kxll.entity.User">
+        <id column="id"  property="id" />
+        <result column="guid"  property="guid" />
+        <result column="create_time"  property="createTime" />
+        <result column="archived"  property="archived" />
+        <result column="email"  property="email" />
+        <result column="password"  property="password" />
+        <result column="phone"  property="phone" />
+        <result column="username"  property="username" />
+        <result column="default_user"  property="defaultUser" />
+        <result column="last_login_time"  property="lastLoginTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, guid, create_time, archived, email, password, phone, username, default_user,
+    last_login_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_
+        where id = #{id}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_
+    where id = #{id}
+  </delete>
+    <insert id="insert" parameterType="com.kxll.entity.User">
+    insert into user_ (id, guid, create_time,
+      archived, email, password,
+      phone, username, default_user,
+      last_login_time)
+    values (#{id}, #{guid}, #{createTime},
+      #{archived}, #{email}, #{password},
+      #{phone}, #{username}, #{defaultUser},
+      #{lastLoginTime})
+  </insert>
+    <insert id="insertSelective" parameterType="com.kxll.entity.User">
+        insert into user_
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="guid != null">
+                guid,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="archived != null">
+                archived,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="phone != null">
+                phone,
+            </if>
+            <if test="username != null">
+                username,
+            </if>
+            <if test="defaultUser != null">
+                default_user,
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id},
+            </if>
+            <if test="guid != null">
+                #{guid},
+            </if>
+            <if test="createTime != null">
+                #{createTime},
+            </if>
+            <if test="archived != null">
+                #{archived},
+            </if>
+            <if test="email != null">
+                #{email},
+            </if>
+            <if test="password != null">
+                #{password},
+            </if>
+            <if test="phone != null">
+                #{phone},
+            </if>
+            <if test="username != null">
+                #{username},
+            </if>
+            <if test="defaultUser != null">
+                #{defaultUser},
+            </if>
+            <if test="lastLoginTime != null">
+                #{lastLoginTime},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kxll.entity.User">
+        update user_
+        <set>
+            <if test="guid != null">
+                guid = #{guid},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="archived != null">
+                archived = #{archived},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="username != null">
+                username = #{username},
+            </if>
+            <if test="defaultUser != null">
+                default_user = #{defaultUser},
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kxll.entity.User">
+    update user_
+    set guid = #{guid},
+      create_time = #{createTime},
+      archived = #{archived},
+      email = #{email},
+      password = #{password},
+      phone = #{phone},
+      username = #{username},
+      default_user = #{defaultUser},
+      last_login_time = #{lastLoginTime}
+    where id = #{id}
+  </update>
+
+    <select id="findByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_
+        where  username = #{username}
+    </select>
+
+    <select id="findRoles" parameterType="java.lang.Long" resultType="map">
+        select
+        r.id,r.role_name
+        from role r left join user_role ur on r.id=ur.rid
+        where  ur.uid = #{userId}
+    </select>
+
+    <select id="findPermissions" parameterType="java.lang.Long" resultType="string">
+        select
+        permission_name
+        from permission
+        where  rid = #{roleId}
+    </select>
+</mapper>

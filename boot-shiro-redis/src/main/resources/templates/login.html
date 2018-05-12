@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
+</head>
+<body>
+<div class="signin">
+    <div class="signin-head"><img src="images/test/head_120.png" alt="" class="img-circle"></div>
+    <form class="form-signin" role="form" action="login" method="post">
+        <input type="text" class="form-control" placeholder="用户名" name="username" required autofocus />
+        <input type="password" class="form-control" placeholder="密码" name="password" required />
+        <button class="btn btn-lg btn-warning btn-block" type="submit">登录</button>
+        <label class="checkbox">
+            <input type="checkbox" value="remember-me"> 记住我
+        </label>
+    </form>
+</div>
+</body>
+</html>

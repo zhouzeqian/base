@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1 shiro:hasRole="admin">admin</h1>
+<h1 shiro:hasRole="mobile">mobile</h1>
+<h1>hello world</h1>
+<a href="/user/find?id=21">find</a>
+</body>
+</html>
