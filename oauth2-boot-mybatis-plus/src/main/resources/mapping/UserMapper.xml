@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxll.mapper.UserMapper">
+    <!--开启二级缓存-->
+
+
+    <resultMap id="BaseResultMap" type="com.kxll.entity.User">
+        <id column="id" property="id"/>
+        <result column="guid" property="guid"/>
+        <result column="create_time" property="createTime"/>
+        <result column="archived" property="archived"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="phone" property="phone"/>
+        <result column="username" property="username"/>
+        <result column="default_user" property="defaultUser"/>
+        <result column="last_login_time" property="lastLoginTime"/>
+    </resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, guid, create_time AS createTime, archived, email, password, phone, username, default_user AS defaultUser, last_login_time AS lastLoginTime
+    </sql>
+    <select id="loadUserByUsername" resultMap="BaseResultMap" parameterType="string">
+        select
+        <include refid="Base_Column_List"/>
+        from user_
+        where username=#{username}
+    </select>
+</mapper>

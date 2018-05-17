@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxll.mapper.MessageMapper">
+	<!--开启二级缓存-->
+
+
+	<resultMap id="BaseResultMap" type="com.kxll.entity.Message">
+		<id column="id" property="id" />
+		<result column="from_id" property="fromId" />
+		<result column="from_name" property="fromName" />
+		<result column="to_id" property="toId" />
+		<result column="to_name" property="toName" />
+		<result column="msg_content" property="msgContent" />
+		<result column="send_time" property="sendTime" />
+		<result column="msg_type" property="msgType" />
+	</resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        id, from_id AS fromId, from_name AS fromName, to_id AS toId, to_name AS toName, msg_content AS msgContent, send_time AS sendTime, msg_type AS msgType
+    </sql>
+</mapper>

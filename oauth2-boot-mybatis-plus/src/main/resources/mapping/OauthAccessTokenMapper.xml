@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kxll.mapper.OauthAccessTokenMapper">
+	<!--开启二级缓存-->
+
+
+	<resultMap id="BaseResultMap" type="com.kxll.entity.OauthAccessToken">
+		<result column="create_time" property="createTime" />
+		<result column="token_id" property="tokenId" />
+		<result column="token" property="token" />
+		<result column="authentication_id" property="authenticationId" />
+		<result column="user_name" property="userName" />
+		<result column="client_id" property="clientId" />
+		<result column="authentication" property="authentication" />
+		<result column="refresh_token" property="refreshToken" />
+	</resultMap>
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+        create_time AS createTime, token_id AS tokenId, token, authentication_id AS authenticationId, user_name AS userName, client_id AS clientId, authentication, refresh_token AS refreshToken
+    </sql>
+</mapper>
